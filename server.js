@@ -110,30 +110,71 @@ function addDepartment() {
 }
 
 function addRole() {
-    inquirer.prompt({
-        name: 'name',
-        type: 'input',
-        message: 'Enter the name of the role:'
-    }).then(answer => {
-        connection.query('INSERT INTO role SET?', { name: answer.name }, (err, res) => {
+    inquirer.prompt([
+        {
+            name: 'title',
+            type: 'input',
+            message: 'Enter the title of the role:'
+        },
+        {
+            name: 'salary',
+            type: 'input',
+            message: 'Enter the salary for this role:'
+        },
+        {
+            name: 'department_id',
+            type: 'input',
+            message: 'Enter the department ID for this role:'
+        }
+    ]).then(answer => {
+        connection.query('INSERT INTO roles SET ?', {
+            title: answer.title,
+            salary: answer.salary,
+            department_id: answer.department_id
+        }, (err, res) => {
             if (err) throw err;
             console.log('Role added successfully!');
+            mainMenu();
         });
     });
 }
 
 function addEmployee() {
-    inquirer.prompt({
-        name: 'name',
-        type: 'input',
-        message: 'Enter the name of the employee:'
-    }).then(answer => {
-        connection.query('INSERT INTO role SET?', { name: answer.name }, (err, res) => {
+    inquirer.prompt([
+        {
+            name: 'first_name',
+            type: 'input',
+            message: 'Enter the first name of the employee:'
+        },
+        {
+            name: 'last_name',
+            type: 'input',
+            message: 'Enter the last name of the employee:'
+        },
+        {
+            name: 'role_id',
+            type: 'input',
+            message: 'Enter the role ID for this employee:'
+        },
+        {
+            name: 'manager_id',
+            type: 'input',
+            message: 'Enter the manager ID for this employee (optional):'
+        }
+    ]).then(answer => {
+        connection.query('INSERT INTO employees SET ?', {
+            first_name: answer.first_name,
+            last_name: answer.last_name,
+            role_id: answer.role_id,
+            manager_id: answer.manager_id || null // Set manager_id to null if not provided
+        }, (err, res) => {
             if (err) throw err;
             console.log('Employee added successfully!');
+            mainMenu();
         });
     });
 }
+
 
 function updateEmployeeRole() {
     // Get the list of employees from the database
