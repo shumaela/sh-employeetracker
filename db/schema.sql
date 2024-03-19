@@ -3,7 +3,7 @@ CREATE DATABASE office_db;
 
 USE office_db;
 
-CREATE TABLE department(
+CREATE TABLE department (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL
 );
