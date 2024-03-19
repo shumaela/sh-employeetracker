@@ -9,6 +9,12 @@ I WANT to be able to view and manage the departments, roles, and employees in my
 SO THAT I can organize and plan my business
 ```
 
+## Description
+
+```md
+An interface application called content management systems (CMS) to manage a company's employee database, using Node.js, Inquirer, and MySQL. Users can view and interact with the information stored in the database of the CMS, such as the company's departments, employees and roles. 
+```
+
 ## Acceptance Criteria
 
 ```md
