@@ -171,7 +171,7 @@ function addEmployee() {
             message: 'Enter the manager ID for this employee (optional):'
         }
     ]).then(answer => {
-        connection.query('INSERT INTO employees SET ?', {
+        connection.query('INSERT INTO employee SET ?', {
             first_name: answer.first_name,
             last_name: answer.last_name,
             role_id: answer.role_id,
@@ -187,7 +187,7 @@ function addEmployee() {
 
 function updateEmployeeRole() {
     // Get the list of employees from the database
-    connection.query('SELECT id, CONCAT(first_name, " ", last_name) AS full_name FROM employees', (err, employees) => {
+    connection.query('SELECT id, CONCAT(first_name, " ", last_name) AS full_name FROM employee', (err, employee) => {
         if (err) throw err;
 
         // Prompt the user to select an employee to update
@@ -195,10 +195,10 @@ function updateEmployeeRole() {
             name: 'employeeId',
             type: 'list',
             message: 'Select the employee to update:',
-            choices: employees.map(employee => ({ name: employee.full_name, value: employee.id }))
+            choices: employee.map(employee => ({ name: employee.full_name, value: employee.id }))
         }).then(employeeAnswer => {
             // Get the list of roles from the database
-            connection.query('SELECT id, title FROM roles', (err, roles) => {
+            connection.query('SELECT id, title FROM role', (err, role) => {
                 if (err) throw err;
 
                 // Prompt the user to select a new role for the employee
@@ -206,11 +206,11 @@ function updateEmployeeRole() {
                     name: 'roleId',
                     type: 'list',
                     message: 'Select the new role for the employee:',
-                    choices: roles.map(role => ({ name: role.title, value: role.id }))
+                    choices: role.map(role => ({ name: role.title, value: role.id }))
                 }).then(roleAnswer => {
                     // Execute the SQL UPDATE query to update the employee's role
                     connection.query(
-                        'UPDATE employees SET role_id = ? WHERE id = ?',
+                        'UPDATE employee SET role_id = ? WHERE id = ?',
                         [roleAnswer.roleId, employeeAnswer.employeeId],
                         (err, res) => {
                             if (err) throw err;

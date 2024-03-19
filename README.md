@@ -36,3 +36,10 @@ THEN I am prompted to enter the employee’s first name, last name, role, and ma
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 ```
+
+## Links
+
+[Walkthrough Video Link](https://www.loom.com/share/efe92cd4386940b8aa08560815708d92?sid=e550f869-b742-4819-a50e-4c15c9670d7e)
+
+[Repo Link](https://github.com/shumaela/sh-employeetracker)
+```
